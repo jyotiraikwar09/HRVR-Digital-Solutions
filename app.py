@@ -160,5 +160,6 @@ if __name__ == "__main__":
     print("=" * 55)
     app.run(debug=True, host="0.0.0.0", port=5001)
 
-    #HrVr Digital Solutions — Server Stopped
-    
+    #hrvr digital solutions, hrvr, hrvr digital, hrvr digital solutions, hrvr digital solutions website, hrvr digital solutions portfolio, hrvr digital solutions services, hrvr digital solutions contact, hrvr digital solutions flask app, hrvr digital solutions python, hrvr digital solutions web development, hrvr digital solutions mobile apps, hrvr digital solutions automation, hrvr digital solutions design
+    print ("=" * 55)
+    print ("  🚀  HrVr Digital Solutions — Server Stopped  🚀  ")
