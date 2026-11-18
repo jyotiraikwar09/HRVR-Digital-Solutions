@@ -1,0 +1,90 @@
+/* ============================================================
+   HRVR Digital Solutions — themes.css
+   Theme token overrides + smooth theme transition.
+   Dark defaults are defined in variables.css (:root).
+   ============================================================ */
+
+/* ---------- LIGHT THEME ---------- */
+[data-theme="light"] {
+  --color-bg-primary: #F4F7FC;
+  --color-bg-secondary: #EAF0FA;
+  --color-surface: rgba(255, 255, 255, 0.72);
+  --color-surface-strong: rgba(255, 255, 255, 0.9);
+  --color-accent: #7C3AED;
+  --color-accent-2: #0891B2;
+  --color-text-primary: #111827;
+  --color-text-secondary: #64748B;
+  --color-border: rgba(15, 23, 42, 0.10);
+  --color-border-strong: rgba(15, 23, 42, 0.20);
+  --color-danger: #DC2626;
+  --color-success: #059669;
+  --color-warning: #D97706;
+
+  --gradient-heading: linear-gradient(92deg, #7C3AED 0%, #6D28D9 35%, #0891B2 100%);
+
+  --glass-shadow: 0 8px 30px rgba(15, 23, 42, 0.10);
+  --glass-shadow-hover: 0 14px 40px rgba(15, 23, 42, 0.16), 0 0 0 1px rgba(124, 58, 237, 0.22);
+}
+
+/* ---------- THEME TRANSITION ----------
+   Applied only while the theme is switching (class added by
+   theme.js, removed on transitionend) so idle scroll/animation
+   performance is unaffected. */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition: background-color 300ms ease, color 300ms ease,
+    border-color 300ms ease, box-shadow 300ms ease !important;
+  transition-delay: 0ms !important;
+}
+
+/* ---------- THEME-AWARE COMPONENT OVERRIDES ---------- */
+
+/* Ambient background orbs are toned down in light mode */
+[data-theme="light"] .orb {
+  opacity: 0.35;
+  filter: blur(70px);
+}
+
+[data-theme="light"] .bg-layer__canvas {
+  opacity: 0.5;
+}
+
+/* Selection color readable in both themes */
+[data-theme="light"] ::selection {
+  background: rgba(124, 58, 237, 0.25);
+  color: #111827;
+}
+
+/* Gradient text keeps enough contrast in light mode */
+[data-theme="light"] .text-gradient {
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Theme toggle icon visibility (driven by data-theme on <html>) */
+.theme-toggle .icon--sun {
+  display: none;
+}
+
+.theme-toggle .icon--moon {
+  display: block;
+}
+
+[data-theme="light"] .theme-toggle .icon--sun {
+  display: block;
+}
+
+[data-theme="light"] .theme-toggle .icon--moon {
+  display: none;
+}
+
+/* Native color-scheme hint so form controls and scrollbars match */
+[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root {
+  color-scheme: dark;
+}

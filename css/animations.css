@@ -1,0 +1,136 @@
+/* ============================================================
+   HRVR Digital Solutions — animations.css
+   Keyframes, scroll-reveal states, entrance animations.
+   All non-essential animation is disabled under
+   prefers-reduced-motion (bottom of file).
+   ============================================================ */
+
+/* ---------- KEYFRAMES ---------- */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes caretBlink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.8);
+  }
+}
+
+@keyframes orbFloat {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(30px, -40px, 0) scale(1.08);
+  }
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes toastOut {
+  to {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ---------- SCROLL REVEAL (driven by animations.js) ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero entrance staggering */
+.hero__inner .reveal:nth-child(1) { --reveal-delay: 0ms; }
+.hero__inner .reveal:nth-child(2) { --reveal-delay: 80ms; }
+.hero__inner .reveal:nth-child(3) { --reveal-delay: 160ms; }
+.hero__inner .reveal:nth-child(4) { --reveal-delay: 240ms; }
+.hero__inner .reveal:nth-child(5) { --reveal-delay: 300ms; }
+.hero__inner .reveal:nth-child(6) { --reveal-delay: 360ms; }
+.hero__inner .reveal:nth-child(7) { --reveal-delay: 420ms; }
+.hero__inner .reveal:nth-child(8) { --reveal-delay: 480ms; }
+
+/* ---------- GRADIENT HEADING SHIFT ---------- */
+.hero__heading .text-gradient {
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
+}
+
+/* ---------- MODAL ENTRANCE ---------- */
+.project-modal[open] .project-modal__inner {
+  animation: toastIn 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .typing-caret {
+    animation: none;
+  }
+
+  .orb {
+    animation: none;
+  }
+}

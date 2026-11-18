@@ -1,0 +1,79 @@
+/* ============================================================
+   HRVR Digital Solutions — variables.css
+   Design tokens: colors, spacing, radii, shadows, typography.
+   Dark values are the :root defaults; light values live in
+   themes.css under [data-theme="light"].
+   ============================================================ */
+
+:root {
+  /* Brand palette (dark defaults) */
+  --color-bg-primary: #080B18;
+  --color-bg-secondary: #10172A;
+  --color-surface: rgba(255, 255, 255, 0.07);
+  --color-surface-strong: rgba(255, 255, 255, 0.12);
+  --color-accent: #8B5CF6;
+  --color-accent-2: #06B6D4;
+  --color-text-primary: #F8FAFC;
+  --color-text-secondary: #A1A1AA;
+  --color-border: rgba(255, 255, 255, 0.12);
+  --color-border-strong: rgba(255, 255, 255, 0.22);
+  --color-danger: #F87171;
+  --color-success: #34D399;
+  --color-warning: #FBBF24;
+
+  /* Gradients */
+  --gradient-brand: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-2) 100%);
+  --gradient-heading: linear-gradient(92deg, #A78BFA 0%, #8B5CF6 35%, #06B6D4 100%);
+  --gradient-glow: radial-gradient(circle at 30% 30%, rgba(139, 92, 246, 0.35), transparent 70%);
+
+  /* Glass system */
+  --glass-bg: var(--color-surface);
+  --glass-border: var(--color-border);
+  --glass-blur: 16px;
+  --glass-radius: 18px;
+  --glass-radius-lg: 26px;
+  --glass-shadow: 0 8px 32px rgba(2, 4, 12, 0.45);
+  --glass-shadow-hover: 0 14px 44px rgba(2, 4, 12, 0.6), 0 0 0 1px rgba(139, 92, 246, 0.25);
+
+  /* Typography */
+  --font-sans: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --font-size-xs: clamp(0.75rem, 0.7rem + 0.2vw, 0.85rem);
+  --font-size-sm: clamp(0.85rem, 0.8rem + 0.25vw, 0.95rem);
+  --font-size-base: clamp(1rem, 0.95rem + 0.3vw, 1.1rem);
+  --font-size-lg: clamp(1.15rem, 1rem + 0.6vw, 1.35rem);
+  --font-size-xl: clamp(1.4rem, 1.1rem + 1.2vw, 2rem);
+  --font-size-2xl: clamp(1.8rem, 1.3rem + 2vw, 2.8rem);
+  --font-size-hero: clamp(2.4rem, 1.4rem + 5vw, 5rem);
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --line-height-tight: 1.15;
+  --line-height-normal: 1.6;
+
+  /* Spacing scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --section-padding: clamp(4rem, 3rem + 4vw, 7rem);
+  --container-max: 1200px;
+  --container-pad: clamp(1.1rem, 0.6rem + 2vw, 2.5rem);
+
+  /* Motion */
+  --transition-fast: 160ms ease;
+  --transition-med: 280ms ease;
+  --transition-slow: 480ms cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Layout */
+  --header-height: 72px;
+  --z-header: 100;
+  --z-modal: 200;
+  --z-toast: 300;
+  --z-loader: 400;
+}
