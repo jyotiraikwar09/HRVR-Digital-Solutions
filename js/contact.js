@@ -4,13 +4,13 @@
    duplicate-submission lock, timeout, and safe notifications.
 
    SECURITY:
-   - No secrets in this file. The endpoint lives in config.js
+- No secrets in this file. The endpoint lives in config.js
      and must be a public-by-design URL.
-   - If no endpoint is configured, the form shows a clear
+- If no endpoint is configured, the form shows a clear
      "not connected" message and the email alternative.
-   - Success is only reported when the endpoint confirms an
+- Success is only reported when the endpoint confirms an
      HTTP 2xx response. Nothing is faked or simulated.
-   - Submitted data is never written to localStorage.
+- Submitted data is never written to localStorage.
    ============================================================ */
 
 (function () {
@@ -29,6 +29,7 @@
   var FIELD_IDS = {
     name: "cf-name",
     email: "cf-email",
+    phone: "cf-phone",
     projectType: "cf-type",
     details: "cf-details",
   };
@@ -88,6 +89,7 @@
     var data = {
       name: "",
       email: "",
+      phone: "",
       projectType: "",
       details: "",
     };
@@ -96,6 +98,15 @@
       data[key] = el ? String(el.value || "").trim() : "";
     });
     return data;
+  }
+
+  function validatePhoneNumber(phone) {
+    if (!phone) return ""; // Optional field (if required, return "Phone number is required.")
+    var cleaned = phone.replace(/[\s\-().]/g, "");
+    if (!/^\+?\d{7,15}$/.test(cleaned)) {
+      return "Please enter a valid phone number (7–15 digits).";
+    }
+    return "";
   }
 
   function resetForm() {
@@ -115,7 +126,10 @@
       if (controller) controller.abort();
     }, config.REQUEST_TIMEOUT_MS || 15000);
 
-    var payload = Object.assign({}, data);
+    var payload = Object.assign({}, data, {
+      phone: data.phone || "Not provided",
+    });
+
     if (config.WEB3FORMS_ACCESS_KEY) {
       payload.access_key = config.WEB3FORMS_ACCESS_KEY;
       payload.subject = "New Project Inquiry (" + data.projectType + ") — " + data.name;
@@ -154,7 +168,11 @@
     clearAllErrors();
 
     var data = getData();
-    var errors = VALIDATORS.validateContactForm(data);
+    var errors = VALIDATORS.validateContactForm(data) || {};
+    if (typeof errors.phone === "undefined") {
+      errors.phone = validatePhoneNumber(data.phone);
+    }
+
     var firstInvalid = null;
 
     Object.keys(errors).forEach(function (key) {

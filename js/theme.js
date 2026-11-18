@@ -12,6 +12,8 @@
   "use strict";
 
   var THEME_KEY = "hrvr-theme";
+  var LIGHT_LOGO = "assets/icons/light.png";
+  var DARK_LOGO = "assets/icons/dark.png";
   var root = document.documentElement;
 
   function getStoredTheme() {
@@ -31,13 +33,35 @@
     return "dark";
   }
 
+  function syncLogos(theme) {
+    var logoSrc = theme === "light" ? LIGHT_LOGO : DARK_LOGO;
+
+    var favicon = document.getElementById("theme-favicon");
+    if (favicon && favicon.getAttribute("href") !== logoSrc) {
+      favicon.setAttribute("href", logoSrc);
+    }
+
+    var logos = document.querySelectorAll("img[data-theme-logo]");
+    for (var i = 0; i < logos.length; i++) {
+      if (logos[i].getAttribute("src") !== logoSrc) {
+        logos[i].setAttribute("src", logoSrc);
+      }
+    }
+  }
+
   function applyTheme(theme) {
     root.setAttribute("data-theme", theme);
+    syncLogos(theme);
   }
 
   var stored = getStoredTheme();
   var initialTheme = stored || getSystemTheme();
   applyTheme(initialTheme);
+
+  // Sync body logo images as soon as HTML body finishes loading
+  document.addEventListener("DOMContentLoaded", function () {
+    syncLogos(window.HRVRTheme.current());
+  });
 
   // Expose a minimal API for the UI toggle (wired in interactions.js)
   window.HRVRTheme = {

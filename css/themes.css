@@ -88,3 +88,40 @@ html.theme-transition *::after {
 :root {
   color-scheme: dark;
 }
+
+/* ---------- LOGO & PURPLE BACKGROUND REMOVAL ---------- */
+.navbar__brand .navbar__logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  padding: 0;
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  overflow: visible;
+}
+
+.navbar__brand .navbar__logo::before,
+.navbar__brand .navbar__logo::after {
+  content: none !important;
+  display: none !important;
+}
+
+.navbar__brand .brand-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  display: block;
+  background: transparent;
+  mix-blend-mode: screen;
+  filter: contrast(1.15);
+}
+
+[data-theme="light"] .navbar__brand .brand-logo {
+  mix-blend-mode: multiply;
+  filter: contrast(1.15);
+}
